@@ -1,0 +1,1 @@
+awk '/Earnings|Request Date:/ {print}' infile | sed 's/<span>Request Date: //g' | sed 's/<\/span>//g' | sed 's/<span>Earnings: <em>//g' | sed 's/<\/em>//g' | paste -d " " - - | sed 's/JPY//g' | sed 's/2017.*/2017/' | sed -e 's/^[ \t]*//' | sed 's/[,.]//g' |  awk '{print "date -d\""$2FS$3FS$4"\" +%Y/%m/%d," $1 }' | bash
